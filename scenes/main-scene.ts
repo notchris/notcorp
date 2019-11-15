@@ -1,6 +1,6 @@
 import Player from '../classes/Player';
 import Controls from '../util/Controls';
-import Dialog from '../scenes/dialog';
+import Dialog from './dialog';
 
 export default class MainScene extends Phaser.Scene {
   public player: Player;
@@ -9,16 +9,15 @@ export default class MainScene extends Phaser.Scene {
 
   constructor() {
     super({
-      key: "MainScene"
+      key: 'MainScene',
     });
   }
 
   preload(): void {
-
     this.load.spritesheet('player', '../assets/character/player.png',
-    { frameWidth: 16, frameHeight: 32, margin: 0, spacing: 0 }
-    );
-
+      {
+        frameWidth: 16, frameHeight: 32, margin: 0, spacing: 0,
+      });
   }
 
   create(): void {
@@ -32,13 +31,12 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
 
-    let graphics = this.add.graphics();
+    const graphics = this.add.graphics();
     graphics.fillStyle(0x00ff00, 1);
     graphics.fillRect(40, 40, 40, 40);
-
   }
 
-  startDialog () {
+  startDialog(): void {
     this.player.frozen = true;
     this.scene.add('Dialog', new Dialog('This is an example dialog.'), true, {});
   }
