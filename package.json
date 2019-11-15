@@ -1,0 +1,30 @@
+{
+  "name": "notcorp",
+  "version": "1.0.0",
+  "description": "Defeat the notevil",
+  "keywords": [
+    "notcorp"
+  ],
+  "devDependencies": {
+    "expose-loader": "0.7.5",
+    "file-loader": "^4.2.0",
+    "ts-loader": "6.2.1",
+    "typescript": "3.7.2",
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0"
+  },
+  "dependencies": {
+    "phaser": "3.20.1",
+    "phaser3-rex-plugins": "^1.1.4",
+    "url-loader": "^2.2.0"
+  },
+  "scripts": {
+    "start": "webpack --mode development && webpack-dev-server --mode development",
+    "build": "webpack --mode production && webpack-dev-server --mode production"
+  },
+  "author": {
+    "name": "notcorp"
+  },
+  "license": "ISC"
+}
