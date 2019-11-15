@@ -38,7 +38,17 @@ export default class MainScene extends Phaser.Scene {
 
   startDialog(): void {
     this.player.frozen = true;
-    this.scene.add('Dialog', new Dialog('This is an example dialog.'), true, {});
+    this.scene.add(
+      'Dialog',
+      new Dialog([['Hello World'], ['This is a test'], ['yessss']]),
+      true,
+      {},
+    );
+  }
+
+  endDialog(): void {
+    this.scene.remove('Dialog');
+    this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
   }
 
   update(): void {

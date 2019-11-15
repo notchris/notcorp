@@ -98,25 +98,25 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     /** Movement */
 
-    moveUp() {
+    moveUp(): void {
       this.body.setVelocityY(-this.speed);
       this.anims.play('walkUp', true);
       this.direction = 'up';
     }
 
-    moveDown() {
+    moveDown(): void {
       this.body.setVelocityY(this.speed);
       this.anims.play('walkDown', true);
       this.direction = 'down';
     }
 
-    moveLeft() {
+    moveLeft(): void {
       this.body.setVelocityX(-this.speed);
       this.anims.play('walkLeft', true);
       this.direction = 'left';
     }
 
-    moveRight() {
+    moveRight(): void {
       this.body.setVelocityX(this.speed);
       this.anims.play('walkRight', true);
       this.direction = 'right';
@@ -124,7 +124,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     /** Helpers */
 
-    updateSensorPosition() {
+    updateSensorPosition(): void {
       switch (this.direction) {
         case 'up':
           this.sensor.y = this.y;
@@ -147,7 +147,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
       }
     }
 
-    oppositeDirection() {
+    oppositeDirection(): string {
       let opposite: string;
       switch (this.direction) {
         case 'up':
@@ -170,7 +170,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     /** Update */
 
-    preUpdate(time: any, delta: any) {
+    preUpdate(time: any, delta: any): void {
       super.preUpdate(time, delta);
       this.updateSensorPosition();
     }
