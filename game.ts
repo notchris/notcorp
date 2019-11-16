@@ -1,7 +1,6 @@
 import 'phaser';
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
-
 import MainScene from './scenes/main-scene';
 
 const gameConfig: Phaser.Types.Core.GameConfig = {

@@ -57,6 +57,10 @@ export default class Controls {
         }
       }
 
+      if (Phaser.Input.Keyboard.JustDown(this.keyEnter)) {
+        this.scene.startMenu();
+      }
+
       /** Freeze controls & set player to idle */
       if (this.player.frozen) {
         this.player.anims.play(`idle${this.player.direction.charAt(0).toUpperCase()}${this.player.direction.slice(1)}`, true);

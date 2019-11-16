@@ -1,6 +1,7 @@
 import Player from '../classes/Player';
 import Controls from '../util/Controls';
 import Dialog from './dialog';
+import Menu from './menu';
 
 export default class MainScene extends Phaser.Scene {
   public player: Player;
@@ -49,6 +50,19 @@ export default class MainScene extends Phaser.Scene {
   endDialog(): void {
     this.scene.remove('Dialog');
     this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
+  }
+
+  startMenu(): void {
+    this.scene.add(
+      'Menu',
+      new Menu(),
+      true,
+      {},
+    );
+  }
+
+  endMenu(): void {
+    this.scene.remove('Menu');
   }
 
   update(): void {
