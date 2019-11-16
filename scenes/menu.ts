@@ -1,4 +1,9 @@
 
+import MenuStatus from './menu-status';
+import MenuBackpack from './menu-backpack';
+import MenuNotebook from './menu-notebook';
+import MenuSettings from './menu-settings';
+
 export default class Menu extends Phaser.Scene {
   keyEnter: Phaser.Input.Keyboard.Key;
   keyUp: Phaser.Input.Keyboard.Key;
@@ -11,20 +16,29 @@ export default class Menu extends Phaser.Scene {
     super({
       key: 'Menu',
     });
+
     this.keyEnter = null;
     this.keyUp = null;
     this.keyDown = null;
+
     this.menuIndex = 0;
     this.menuObjects = [];
     this.menuItems = [{
       id: 'status',
       title: 'Status',
+      scene: 'MenuStatus',
     }, {
       id: 'backpack',
       title: 'Backpack',
+      scene: 'MenuBackpack',
     }, {
       id: 'notebook',
       title: 'Notebook',
+      scene: 'MenuNotebook',
+    }, {
+      id: 'settings',
+      title: 'Settings',
+      scene: 'MenuSettings',
     }, {
       id: 'save',
       title: 'Save',
@@ -44,6 +58,7 @@ export default class Menu extends Phaser.Scene {
 
   create(): void {
     this.scene.pause('MainScene');
+    this.scene.pause('Dialog');
     this.keyEnter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -63,12 +78,12 @@ export default class Menu extends Phaser.Scene {
     /** Time panel pattern image fill */
     const imageTime = this.add.tileSprite(10, 10, 150, 40, 'patterns', 2);
     imageTime.setOrigin(0);
-    imageTime.setTileScale(2, 2);
+    imageTime.setTileScale(3, 3);
     imageTime.alpha = 0.5;
 
     /** Time panel inner */
     const timePanelB = this.add.graphics();
-    timePanelB.fillStyle(0xDDDDDD, 1);
+    timePanelB.fillStyle(0xEEEEEE, 1);
     timePanelB.fillRoundedRect(15, 15, 140, 30, 2);
     timePanelB.lineStyle(1, 0x000000, 1);
     timePanelB.strokeRoundedRect(15, 15, 140, 30, 2);
@@ -85,12 +100,12 @@ export default class Menu extends Phaser.Scene {
     /** Menu panel pattern image fill */
     const imageMenu = this.add.tileSprite(250, 10, 140, 200, 'patterns', 2);
     imageMenu.setOrigin(0);
-    imageMenu.setTileScale(2, 2);
+    imageMenu.setTileScale(3, 3);
     imageMenu.alpha = 0.5;
 
     /** Menu panel inner */
     const menuPanelB = this.add.graphics();
-    menuPanelB.fillStyle(0xDDDDDD, 1);
+    menuPanelB.fillStyle(0xEEEEEE, 1);
     menuPanelB.fillRoundedRect(255, 15, 130, 190, 2);
     menuPanelB.lineStyle(1, 0x000000, 1);
     menuPanelB.strokeRoundedRect(255, 15, 130, 190, 2);
@@ -100,6 +115,12 @@ export default class Menu extends Phaser.Scene {
       const itemText = this.add.text(265, (24 * i) + 24, item.title, { fontFamily: 'Arial', fontSize: 18, color: '#000000' });
       this.menuObjects.push(itemText);
     });
+
+    /** Sub Scenes */
+    this.scene.add('MenuStatus', MenuStatus, true, {});
+    this.scene.add('MenuBackpack', MenuBackpack, true, {});
+    this.scene.add('MenuNotebook', MenuNotebook, true, {});
+    this.scene.add('MenuSettings', MenuSettings, true, {});
   }
 
   update(): void {
@@ -112,16 +133,24 @@ export default class Menu extends Phaser.Scene {
 
     for (let i = 0; i < this.menuObjects.length; i += 1) {
       if (i === this.menuIndex) {
-        this.menuObjects[i].setColor('#4aa3e4');
+        this.menuObjects[i].setColor('#005397');
+        if (this.menuItems[i].scene) {
+          this.scene.get(this.menuItems[i].scene).scene.setVisible(true);
+        }
       } else {
         this.menuObjects[i].setColor('#000000');
+        if (this.menuItems[i].scene) {
+          this.scene.get(this.menuItems[i].scene).scene.setVisible(false);
+        }
       }
     }
 
     if (Phaser.Input.Keyboard.JustDown(this.keyEnter)) {
       if (this.menuItems[this.menuIndex].id === 'close') {
         this.scene.resume('MainScene');
-        this.scene.remove(this);
+        this.scene.resume('Dialog');
+        const main: any = this.scene.get('MainScene');
+        main.endMenu();
       }
     }
     if (Phaser.Input.Keyboard.JustDown(this.keyDown)) {

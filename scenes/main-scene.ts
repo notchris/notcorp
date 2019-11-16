@@ -62,6 +62,11 @@ export default class MainScene extends Phaser.Scene {
   }
 
   endMenu(): void {
+    const menu = this.scene.get('Menu');
+    menu.scene.remove('MenuStatus');
+    menu.scene.remove('MenuBackpack');
+    menu.scene.remove('MenuNotebook');
+    menu.scene.remove('MenuSettings');
     this.scene.remove('Menu');
   }
 
