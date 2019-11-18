@@ -49,18 +49,18 @@ export default class MenuNotebook extends Phaser.Scene {
     menuPanelB.strokeRoundedRect(15, 65, 220, 290, 2);
 
     /** Menu panel title background image fill */
-    const imageTitle = this.add.tileSprite(15, 65, 220, 30, 'patterns', 4);
+    const imageTitle = this.add.tileSprite(15, 65, 220, 22, 'patterns', 4);
     imageTitle.setOrigin(0);
     imageTitle.setTileScale(3, 3);
-    imageTitle.alpha = 0.2;
+    imageTitle.alpha = 0.1;
 
     /** Menu panel title background bottom stroke */
     const imageTitleStroke = this.add.graphics();
-    imageTitleStroke.fillStyle(0xb4b6b6, 1);
-    imageTitleStroke.fillRect(16, 95, 218, 2);
+    imageTitleStroke.fillStyle(0xCCCCCC, 1);
+    imageTitleStroke.fillRect(16, 86, 218, 2);
 
     /** Menu title text */
-    this.add.text(21, 70, 'Notebook', { fontFamily: 'Arial Black', fontSize: 20, color: '#333333' });
+    this.add.text(22, 67, 'Notebook', { fontFamily: 'Visitor TT1 BRK', fontSize: 20, color: '#333333' });
   }
 
   update(): void {

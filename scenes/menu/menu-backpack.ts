@@ -1,14 +1,15 @@
 
-export default class MenuStatus extends Phaser.Scene {
+export default class MenuBackpack extends Phaser.Scene {
   keyEnter: Phaser.Input.Keyboard.Key;
   keyUp: Phaser.Input.Keyboard.Key;
   keyDown: Phaser.Input.Keyboard.Key;
   menuIndex: number;
   menuItems: Array<any>;
   menuObjects: Array<any>;
+  rexUI: any;
   constructor() {
     super({
-      key: 'MenuStatus',
+      key: 'MenuBackpack',
     });
 
     this.keyEnter = null;
@@ -49,18 +50,35 @@ export default class MenuStatus extends Phaser.Scene {
     menuPanelB.strokeRoundedRect(15, 65, 220, 290, 2);
 
     /** Menu panel title background image fill */
-    const imageTitle = this.add.tileSprite(15, 65, 220, 30, 'patterns', 4);
+    const imageTitle = this.add.tileSprite(15, 65, 220, 22, 'patterns', 4);
     imageTitle.setOrigin(0);
     imageTitle.setTileScale(3, 3);
-    imageTitle.alpha = 0.2;
+    imageTitle.alpha = 0.1;
 
     /** Menu panel title background bottom stroke */
     const imageTitleStroke = this.add.graphics();
-    imageTitleStroke.fillStyle(0xb4b6b6, 1);
-    imageTitleStroke.fillRect(16, 95, 218, 2);
+    imageTitleStroke.fillStyle(0xCCCCCC, 1);
+    imageTitleStroke.fillRect(16, 86, 218, 2);
 
     /** Menu title text */
-    this.add.text(21, 70, 'Status', { fontFamily: 'Arial Black', fontSize: 20, color: '#333333' });
+    this.add.text(22, 67, 'Backpack', { fontFamily: 'Visitor TT1 BRK', fontSize: 20, color: '#333333' });
+
+    const itemPanelTopStroke = this.add.graphics();
+    itemPanelTopStroke.fillStyle(0xCCCCCC, 1);
+    itemPanelTopStroke.fillRect(16, 113, 218, 2);
+
+    /** Item panel grid */
+    const itemGroup = this.add.container(23, 121, []);
+    for (let i = 0; i < 5; i += 1) {
+      for (let j = 0; j < 4; j += 1) {
+        const itemBox = this.add.graphics();
+        itemBox.fillStyle(0xDDDDDD, 1);
+        itemBox.fillRect(i * 42, j * 42, 36, 36);
+        itemBox.lineStyle(2, 0xBBBBBB, 1);
+        itemBox.strokeRoundedRect(i * 42, j * 42, 36, 36, 2);
+        itemGroup.add(itemBox);
+      }
+    }
   }
 
   update(): void {

@@ -89,7 +89,7 @@ export default class Menu extends Phaser.Scene {
     timePanelB.strokeRoundedRect(15, 15, 140, 30, 2);
 
     /** Time text */
-    this.timeText = this.add.text(50, 20, '', { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
+    this.timeText = this.add.text(50, 20, '', { fontFamily: 'Visitor TT1 BRK', fontSize: 18, color: '#000000' });
     /** Menu panel outer border */
     const menuPanel = this.add.graphics();
     menuPanel.fillStyle(0x4aa3e4, 1);
@@ -112,7 +112,7 @@ export default class Menu extends Phaser.Scene {
 
     /** Menu items */
     this.menuItems.forEach((item, i) => {
-      const itemText = this.add.text(265, (24 * i) + 24, item.title, { fontFamily: 'Arial', fontSize: 18, color: '#000000' });
+      const itemText = this.add.text(265, (24 * i) + 24, item.title, { fontFamily: 'Visitor TT1 BRK', fontSize: 18, color: '#000000' });
       this.menuObjects.push(itemText);
     });
 

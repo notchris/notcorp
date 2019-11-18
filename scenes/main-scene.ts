@@ -1,7 +1,8 @@
 import Player from '../classes/Player';
 import Controls from '../util/Controls';
-import Dialog from './dialog';
-import Menu from './menu';
+import Dialog from './dialog/dialog';
+import Menu from './menu/menu';
+import NPC from '../classes/NPC';
 
 export default class MainScene extends Phaser.Scene {
   public player: Player;
@@ -19,6 +20,10 @@ export default class MainScene extends Phaser.Scene {
       {
         frameWidth: 16, frameHeight: 32, margin: 0, spacing: 0,
       });
+    this.load.spritesheet('pink', '../assets/character/pink.png',
+      {
+        frameWidth: 16, frameHeight: 32, margin: 0, spacing: 0,
+      });
   }
 
   create(): void {
@@ -31,6 +36,8 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.fadeIn(1000);
     this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
+
+    const testNpc = new NPC(this, 120, 100, 'pink', 0);
 
     const graphics = this.add.graphics();
     graphics.fillStyle(0x00ff00, 1);

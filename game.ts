@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import 'phaser';
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
+import GridTablePlugin from 'phaser3-rex-plugins/plugins/gridtable-plugin';
 import MainScene from './scenes/main-scene';
+
+const WebFont = require('webfontloader');
+const VisitorFont = require('./assets/fonts/visitor.css');
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   width: 400,
@@ -32,6 +37,11 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
       plugin: BBCodeTextPlugin,
       start: true,
     },
+    {
+      key: 'rexGridTablePlugin',
+      plugin: GridTablePlugin,
+      start: true,
+    },
     ],
   },
   scene: MainScene,
@@ -46,5 +56,13 @@ export class Game extends Phaser.Game {
 
 window.addEventListener('load', () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const game = new Game(gameConfig);
+  WebFont.load({
+    custom: {
+      families: ['Visitor TT1 BRK'],
+      urls: [VisitorFont],
+    },
+    fontactive: (): void => {
+      const game = new Game(gameConfig);
+    },
+  });
 });
