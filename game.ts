@@ -2,8 +2,11 @@
 import 'phaser';
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
-import GridTablePlugin from 'phaser3-rex-plugins/plugins/gridtable-plugin';
+import LoginScene from './scenes/login-scene';
+import RegisterScene from './scenes/register-scene';
+import AboutScene from './scenes/about-scene';
 import MainScene from './scenes/main-scene';
+import StartScene from './scenes/start-scene';
 
 const WebFont = require('webfontloader');
 const VisitorFont = require('./assets/fonts/visitor.css');
@@ -13,6 +16,13 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
   height: 400,
   type: Phaser.WEBGL,
   parent: 'phaser',
+  scale: {
+    mode: Phaser.Scale.NONE,
+    autoCenter: Phaser.Scale.NO_CENTER,
+  },
+  dom: {
+    createContainer: true,
+  },
   disableContextMenu: true,
   render: {
     antialias: false,
@@ -27,24 +37,20 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     },
   },
   plugins: {
-    global: [{
-      key: 'rexTextTyping',
-      plugin: TextTypingPlugin,
-      start: true,
-    },
-    {
-      key: 'rexBBCodeTextPlugin',
-      plugin: BBCodeTextPlugin,
-      start: true,
-    },
-    {
-      key: 'rexGridTablePlugin',
-      plugin: GridTablePlugin,
-      start: true,
-    },
+    global: [
+      {
+        key: 'rexTextTyping',
+        plugin: TextTypingPlugin,
+        start: true,
+      },
+      {
+        key: 'rexBBCodeTextPlugin',
+        plugin: BBCodeTextPlugin,
+        start: true,
+      },
     ],
   },
-  scene: MainScene,
+  scene: [StartScene, LoginScene, RegisterScene, AboutScene, MainScene],
 };
 
 export class Game extends Phaser.Game {
@@ -55,13 +61,13 @@ export class Game extends Phaser.Game {
 }
 
 window.addEventListener('load', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   WebFont.load({
     custom: {
       families: ['Visitor TT1 BRK'],
       urls: [VisitorFont],
     },
     fontactive: (): void => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const game = new Game(gameConfig);
     },
   });

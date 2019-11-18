@@ -12,19 +12,24 @@ body {
     margin: 0;
 }
 
-html, body, #phaser {
+html,
+body {
     width: 100%;
     height: 100%;
 }
 
 #phaser {
-    position: relative;
-}
-
-canvas {
+    width: 400px;
+    height: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid #BBBBBB;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: none;
+}
+
+button {
+    font-size: 18px;
+    font-family: 'Visitor TT1 BRK';
 }

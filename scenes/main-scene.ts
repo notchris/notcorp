@@ -4,6 +4,7 @@ import Dialog from './dialog/dialog';
 import Menu from './menu/menu';
 import NPC from '../classes/NPC';
 
+
 export default class MainScene extends Phaser.Scene {
   public player: Player;
   public cursors: Phaser.Types.Input.Keyboard.CursorKeys;

@@ -41,7 +41,7 @@ export default class Dialog extends Phaser.Scene {
     graphics.fillRect(0, 310, 400, 90);
 
     /** Dialog text */
-    this.text = (this.add as any).rexBBCodeText(20, 340, '', { fontFamily: 'Arial', fontSize: 15, color: '#ffffff' });
+    this.text = (this.add as any).rexBBCodeText(20, 340, '', { fontFamily: 'Visitor TT1 BRK', fontSize: 15, color: '#ffffff' });
     this.text.typing = (this.plugins.get('rexTextTyping') as any).add(this.text, {
       speed: this.speed,
       setTextCallback: (text: string, isLastChar: boolean) => {
