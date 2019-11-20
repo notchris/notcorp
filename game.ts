@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import 'phaser';
+import './assets/style.css';
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
 import LoginScene from './scenes/login-scene';

@@ -15,7 +15,45 @@ export default class LoginScene extends Phaser.Scene {
     const loginForm = element.getChildByID('loginForm');
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      console.log('ok');
+      const usernameInput = (element.getChildByID('username') as any).value;
+      const passwordInput = (element.getChildByID('password') as any).value;
+      const message = element.getChildByID('message');
+
+      if (passwordInput === '') {
+        message.innerHTML = '<p>Invalid username or password.</p>';
+        console.log('Invalid username or password.');
+        return;
+      }
+      if (usernameInput === '') {
+        message.innerHTML = '<p>Invalid username or password.</p>';
+        console.log('Invalid username or password.');
+        return;
+      }
+
+      fetch('https://notcorp.dev/login', {
+        method: 'post',
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          username: usernameInput,
+          password: passwordInput,
+        }),
+        headers: {
+          'Access-Control-Allow-Credentials': 'true',
+          'Content-Type': 'application/json',
+        },
+      }).then((response) => response.json()).then((data) => {
+        if (data.status === 'ok') {
+          this.goBack();
+        } else {
+          message.innerHTML = '<p>Invalid username or password.</p>';
+          console.log('Invalid username or password.');
+        }
+      }).catch((err) => {
+        if (err) {
+          message.innerHTML = '<p>Server error.</p>';
+          console.log('Server error.');
+        }
+      });
     });
     element.getChildByID('backButton').addEventListener('click', () => {
       this.goBack();

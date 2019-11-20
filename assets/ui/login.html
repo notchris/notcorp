@@ -11,7 +11,6 @@
         font-size: 50px;
         text-align: center;
         margin-bottom: 10px;
-        font-family: 'Visitor TT1 BRK';
     }
 
     #login .subheader {
@@ -20,12 +19,10 @@
         font-size: 20px;
         text-align: center;
         margin-bottom: 40px;
-        font-family: 'Visitor TT1 BRK';
     }
 
     #login form {
         width: 100%;
-        font-family: 'Visitor TT1 BRK';
     }
 
     #login form div.input {
@@ -39,6 +36,11 @@
     #login form div.input input {
         width: 100%;
     }
+
+    #message {
+        width: 100%;
+        color: #FF0000;
+    }
 </style>
 
 <div id="login">
@@ -47,12 +49,13 @@
     <form id="loginForm">
         <div class="input">
             <label>Username</label>
-            <input type="text" />
+            <input autocomplete="nickname" id="username" type="text" />
         </div>
         <div class="input">
             <label>Password</label>
-            <input type="password" />
+            <input autocomplete="current-password" id="password" type="password" />
         </div>
+        <div id="message"></div>
         <div class="input">
             <button id="backButton" type="button">Go Back</button>
             <button type="submit">Login</button>

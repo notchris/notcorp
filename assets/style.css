@@ -25,11 +25,13 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-rendering: optimizeSpeed;
+}
+
+header {
     -webkit-font-smoothing: none;
+    font-family: 'Visitor TT1 BRK';
 }
 
 button {
     font-size: 18px;
-    font-family: 'Visitor TT1 BRK';
 }

@@ -22,6 +22,9 @@ export default class StartScene extends Phaser.Scene {
     element.getChildByID('registerButton').addEventListener('click', () => {
       this.register();
     });
+    element.getChildByID('devButton').addEventListener('click', () => {
+      this.dev();
+    });
     element.getChildByID('aboutButton').addEventListener('click', () => {
       this.about();
     });
@@ -33,6 +36,10 @@ export default class StartScene extends Phaser.Scene {
 
   register(): void {
     this.scene.start('RegisterScene');
+  }
+
+  dev(): void {
+    this.scene.start('MainScene');
   }
 
   about(): void {
