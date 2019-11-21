@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "type": "dialog",
+        "data": [
+            [
+                "Hello World"
+            ],
+            [
+                "This is a message."
+            ]
+        ],
+        "callback": 3
+    },
+    {
+        "id": 2,
+        "type": "dialog",
+        "data": [
+            [
+                "This is another message."
+            ]
+        ]
+    },
+    {
+        "id": 3,
+        "type": "choice",
+        "prompt": "What will you choose?",
+        "data": [
+            {
+                "text": "Do nothing",
+                "callback": 4
+            },
+            {
+                "text": "Dance",
+                "callback": 5
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "type": "dialog",
+        "data": [
+            [
+                "Not gonna do anything, huh?"
+            ]
+        ]
+    },
+    {
+        "id": 5,
+        "type": "dialog",
+        "data": [
+            [
+                "PARTYYY!"
+            ]
+        ]
+    }
+]

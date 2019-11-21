@@ -32,13 +32,12 @@ export default class LoginScene extends Phaser.Scene {
 
       fetch('https://notcorp.dev/login', {
         method: 'post',
-        credentials: 'same-origin',
+        credentials: 'include',
         body: JSON.stringify({
           username: usernameInput,
           password: passwordInput,
         }),
         headers: {
-          'Access-Control-Allow-Credentials': 'true',
           'Content-Type': 'application/json',
         },
       }).then((response) => response.json()).then((data) => {

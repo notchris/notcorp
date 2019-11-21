@@ -55,9 +55,13 @@ export default class MainScene extends Phaser.Scene {
     );
   }
 
-  endDialog(): void {
+  endDialog(callback: Function): void {
     this.scene.remove('Dialog');
-    this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
+    if (callback) {
+      callback();
+    } else {
+      this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
+    }
   }
 
   startMenu(): void {

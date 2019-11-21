@@ -5,9 +5,10 @@ import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
 import LoginScene from './scenes/login-scene';
 import RegisterScene from './scenes/register-scene';
-import AboutScene from './scenes/about-scene';
-import MainScene from './scenes/main-scene';
 import StartScene from './scenes/start-scene';
+import MainScene from './scenes/main-scene';
+
+import IntroScene from './scenes/intro/intro';
 
 const WebFont = require('webfontloader');
 const VisitorFont = require('./assets/fonts/visitor.css');
@@ -51,7 +52,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
       },
     ],
   },
-  scene: [StartScene, LoginScene, RegisterScene, AboutScene, MainScene],
+  scene: [StartScene, LoginScene, RegisterScene, IntroScene, MainScene],
 };
 
 export class Game extends Phaser.Game {

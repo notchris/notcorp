@@ -3,15 +3,9 @@
         width: 400px;
         height: 400px;
         padding: 20px;
-        background: transparent;
-    }
-
-    #start header {
-        width: 100%;
-        color: #FFFFFF;
-        font-size: 50px;
-        text-align: center;
-        margin-bottom: 40px;
+        background-image: url('./assets/ui/main_bg.png');
+        background-position: top left;
+        background-repeat: no-repeat;
     }
 
     #start div.menu {
@@ -20,16 +14,29 @@
     }
 
     #start div.menu button {
-        margin: 4px;
+        margin: 10px auto;
+        display: block;
+    }
+
+    #status {
+        width: 100%;
+        padding: 1em;
+        color: #FFFFFF;
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .hidden {
+        display: none !important;
     }
 </style>
 
 <div id="start">
-    <header>NOTCORP</header>
+    <div id="status"></div>
     <div class="menu">
-        <button id="loginButton" type="button">Login</button><br />
-        <button id="registerButton" type="button">Create Account</button><br />
-        <button id="devButton" type="button">Developer</button><br />
-        <button id="aboutButton" type="button">About</button>
+        <button id="loginButton" type="button">Login</button>
+        <button id="logoutButton" type="button">Logout</button>
+        <button id="registerButton" type="button">Create Account</button>
+        <button id="devButton" type="button">Developer</button>
     </div>
 </div>
