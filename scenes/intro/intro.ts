@@ -22,10 +22,6 @@ export default class IntroScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.test = this.add.graphics();
-    this.test.fillStyle(0x00ff00, 1);
-    this.test.fillRect(40, 40, 40, 40);
-
     const graphics = this.add.graphics();
     graphics.fillStyle(0x22657f, 1);
     graphics.fillRect(0, 0, 4, 4);
