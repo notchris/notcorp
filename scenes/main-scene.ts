@@ -1,6 +1,6 @@
 import Player from '../classes/Player';
 import Controls from '../util/Controls';
-import Dialog from './dialog/dialog';
+import Dialog from './event/dialog';
 import Menu from './menu/menu';
 import NPC from '../classes/NPC';
 

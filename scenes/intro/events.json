@@ -4,35 +4,30 @@
         "type": "dialog",
         "data": [
             [
-                "Hello World"
+                "Hello there."
             ],
             [
-                "This is a message."
+                "Thank you for joining us."
             ]
         ],
-        "callback": 3
-    },
-    {
-        "id": 2,
-        "type": "dialog",
-        "data": [
-            [
-                "This is another message."
-            ]
-        ]
+        "callback": 2
     },
     {
         "id": 3,
         "type": "choice",
-        "prompt": "What will you choose?",
+        "prompt": "How's your day going?",
         "data": [
             {
-                "text": "Do nothing",
+                "text": "Great!",
                 "callback": 4
             },
             {
-                "text": "Dance",
+                "text": "Average",
                 "callback": 5
+            },
+            {
+                "text": "Bad.",
+                "callback": 6
             }
         ]
     },
@@ -41,17 +36,126 @@
         "type": "dialog",
         "data": [
             [
-                "Not gonna do anything, huh?"
+                "That's good to hear! =)"
             ]
-        ]
+        ],
+        "callback": 7
     },
     {
         "id": 5,
         "type": "dialog",
         "data": [
             [
-                "PARTYYY!"
+                "Just average?"
             ]
-        ]
+        ],
+        "callback": 7
+    },
+    {
+        "id": 6,
+        "type": "dialog",
+        "data": [
+            [
+                "In time...things will improve."
+            ]
+        ],
+        "callback": 7
+    },
+    {
+        "id": 7,
+        "type": "dialog",
+        "data": [
+            [
+                "Anyway..."
+            ],
+            [
+                "You're probably wondering, 'What is NOTCORP?'"
+            ],
+            [
+                "'Who is NOTCORP?..'"
+            ],
+            [
+                "'Why is NOTCORP?....'"
+            ],
+            [
+                "But we can only answer so many questions."
+            ],
+            [
+                "Like really, I'm not so much a peoples' person."
+            ],
+            [
+                "Or is it [i]peoples'[/i]?"
+            ],
+            [
+                "Also not really a grammar person so sorry..."
+            ],
+            [
+                "If I mess up in a few places."
+            ],
+            [
+                "But yeah, NOTCORP is the best."
+            ],
+            [
+                "Really fun, creative introductions..."
+            ],
+            [
+                "Really just AAA quality shit we're dishing out."
+            ],
+            [
+                "And it's all because of you."
+            ],
+            [
+                "What was your name again........?"
+            ],
+            [
+                "[color=#73c08c]notchris[/color] huh? Weird name."
+            ],
+            [
+                "OK, and what do you look like [color=#73c08c]notchris[/color]?"
+            ]
+        ],
+        "callback": 8
+    },
+    {
+        "id": 2,
+        "type": "editcharacter"
+    },
+    {
+        "id": 9,
+        "type": "dialog",
+        "data": [
+            [
+                "Hmm..."
+            ],
+            [
+                "Have you lost weight?"
+            ],
+            [
+                "Just kidding..."
+            ],
+            [
+                "You're in space by the way."
+            ],
+            [
+                "Did you think it was snowing?"
+            ],
+            [
+                "I can see that."
+            ],
+            [
+                "..."
+            ],
+            [
+                "OK! For real now. NOTCORP."
+            ],
+            [
+                "And........"
+            ]
+        ],
+        "callback": 10
+    },
+    {
+        "id": 10,
+        "type": "startGame"
     }
 ]

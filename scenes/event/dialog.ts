@@ -23,7 +23,7 @@ export default class Dialog extends Phaser.Scene {
     };
     this.indicatorText = null;
     this.indicatorTextTween = null;
-    this.speed = 100;
+    this.speed = 80;
     this.waiting = false;
     this.keyE = null;
     this.index = 0;
@@ -31,19 +31,37 @@ export default class Dialog extends Phaser.Scene {
   }
 
   preload(): void {
-    // console.log('preload requires implementation');
+    this.load.spritesheet('dialogPatterns', '../assets/ui/patterns.png',
+      {
+        frameWidth: 16, frameHeight: 16, margin: 0, spacing: 0,
+      });
   }
 
   create(): void {
     this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
     /** Dialog box background */
-    const graphics = this.add.graphics();
-    graphics.fillStyle(0x000000, 1);
-    graphics.fillRect(0, 310, 400, 90);
+    const dialogBox = this.add.graphics();
+    dialogBox.fillStyle(0x333333, 1);
+    dialogBox.fillRect(0, 310, 400, 90);
+    const dialogBorder = this.add.tileSprite(0, 310, 400, 90, 'dialogPatterns', 2);
+    dialogBorder.setOrigin(0);
+    dialogBorder.setTileScale(3, 3);
+    dialogBorder.alpha = 0.5;
+    // dialogBox.lineStyle(2, 0xffffff, 1);
+    // dialogBox.strokeRect(0, 310, 400, 90);
+
+    /** Dialog top divider */
+    const dialogLine = this.add.graphics();
+    dialogLine.fillStyle(0x666666, 1);
+    dialogLine.fillRect(0, 308, 400, 2);
 
     /** Dialog text */
-    this.text = (this.add as any).rexBBCodeText(20, 340, '', { fontFamily: 'Visitor TT1 BRK', fontSize: 15, color: '#ffffff' });
+    this.text = (this.add as any).rexBBCodeText(20, 340, '', {
+      fontFamily: 'Varela Round',
+      fontSize: 16,
+      color: '#ffffff',
+    });
     this.text.typing = (this.plugins.get('rexTextTyping') as any).add(this.text, {
       speed: this.speed,
       setTextCallback: (text: string, isLastChar: boolean) => {
@@ -55,8 +73,7 @@ export default class Dialog extends Phaser.Scene {
     });
     this.text.typing.start(this.dialog[this.index]);
     // Indicator Text
-    this.indicatorText = this.add.text(374, 371, 'E', { fontFamily: 'Arial', fontSize: 16, color: '#ffffff' });
-
+    this.indicatorText = this.add.text(374, 371, 'E', { fontFamily: 'Varela Round', fontSize: 16, color: '#ffffff' });
     // Flashing E indicator
     this.indicatorTextTween = this.tweens.add({
       targets: this.indicatorText,

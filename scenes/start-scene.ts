@@ -53,7 +53,12 @@ export default class StartScene extends Phaser.Scene {
     fetch('https://notcorp.dev/status', {
       method: 'get',
       credentials: 'include',
-    }).then((response) => response.json()).then((data) => {
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('WTF');
+      }
+      return response.json();
+    }).then((data) => {
       console.log(data);
       if (data.status === 'ok') {
         this.loggedIn = true;
@@ -61,7 +66,7 @@ export default class StartScene extends Phaser.Scene {
         this.statusMessage.innerHTML = `<p>Logged in as: ${this.username} </p>`;
       }
     }).catch((err) => {
-      console.warn(err);
+      console.log(err);
     });
   }
 

@@ -11,7 +11,6 @@ import MainScene from './scenes/main-scene';
 import IntroScene from './scenes/intro/intro';
 
 const WebFont = require('webfontloader');
-const VisitorFont = require('./assets/fonts/visitor.css');
 
 const gameConfig: Phaser.Types.Core.GameConfig = {
   width: 400,
@@ -64,9 +63,8 @@ export class Game extends Phaser.Game {
 
 window.addEventListener('load', () => {
   WebFont.load({
-    custom: {
-      families: ['Visitor TT1 BRK'],
-      urls: [VisitorFont],
+    google: {
+      families: ['Varela Round'],
     },
     fontactive: (): void => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
