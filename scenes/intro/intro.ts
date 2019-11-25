@@ -1,7 +1,6 @@
 import Dialog from '../event/dialog';
 import Choice from '../event/choice';
 import Cutscene from '../event/cutscene';
-import EditCharacter from '../event/editcharacter';
 
 import * as eventList from './events.json';
 
@@ -55,9 +54,6 @@ export default class IntroScene extends Phaser.Scene {
         break;
       case 'cutscene':
         this.scene.add('Cutscene', new Cutscene(ev.scene, ev.callback), true, {});
-        break;
-      case 'editcharacter':
-        this.scene.add('EditCharacter', EditCharacter, true, {});
         break;
       case 'startGame':
         this.scene.remove('EditCharacter');

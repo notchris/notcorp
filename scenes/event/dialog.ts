@@ -58,7 +58,7 @@ export default class Dialog extends Phaser.Scene {
 
     /** Dialog text */
     this.text = (this.add as any).rexBBCodeText(20, 340, '', {
-      fontFamily: 'Varela Round',
+      fontFamily: 'Bree Serif',
       fontSize: 16,
       color: '#ffffff',
     });
@@ -73,7 +73,7 @@ export default class Dialog extends Phaser.Scene {
     });
     this.text.typing.start(this.dialog[this.index]);
     // Indicator Text
-    this.indicatorText = this.add.text(374, 371, 'E', { fontFamily: 'Varela Round', fontSize: 16, color: '#ffffff' });
+    this.indicatorText = this.add.text(374, 371, 'E', { fontFamily: 'Bree Serif', fontSize: 16, color: '#ffffff' });
     // Flashing E indicator
     this.indicatorTextTween = this.tweens.add({
       targets: this.indicatorText,

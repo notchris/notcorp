@@ -1,20 +1,40 @@
 export default class NPC extends Phaser.Physics.Arcade.Sprite {
     public body: Phaser.Physics.Arcade.Body;
+    public patrol: boolean;
     public speed: number;
     public direction: string;
+    public moveTo: any;
+    public playerCollider: Phaser.Physics.Arcade.Collider;
 
-    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: number) {
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: number,
+      patrol: boolean) {
       super(scene, x, y, texture, frame);
 
       /** Sprite properties */
       this.setTexture(texture);
       this.setPosition(x, y);
-      scene.physics.world.enable(this); // necessary?
+      scene.physics.world.enable(this);
       scene.add.existing(this);
+
+      /** Patrol */
+      this.patrol = patrol;
+
+      /** MoveTo */
+      this.moveTo = (scene.plugins.get('rexMoveTo') as any).add(this, {
+        speed: 20,
+        rotateToTarget: false,
+      });
+
+      this.moveTo.on('complete', () => {
+        this.scene.time.delayedCall(500, () => {
+          this.startPatrol();
+        }, [], this);
+      });
 
       /** Physics body properties */
       this.body.setBounce(0, 0);
       this.body.setCollideWorldBounds(true);
+      this.body.setImmovable(true);
       this.body.width = 14;
       this.body.height = 12;
       this.body.offset.x = 1;
@@ -23,16 +43,6 @@ export default class NPC extends Phaser.Physics.Arcade.Sprite {
       /** Custom properties */
       this.speed = 80;
       this.direction = 'down';
-
-      /** Random direction loop */
-      scene.time.addEvent({
-        delay: 2000,
-        callback: () => {
-          this.direction = this.randomDirection();
-        },
-        callbackScope: this,
-        loop: true,
-      });
 
       /** Sprite Animations */
       const frames = scene.anims.generateFrameNumbers(texture, {});
@@ -91,10 +101,29 @@ export default class NPC extends Phaser.Physics.Arcade.Sprite {
         frameRate: 6,
         repeat: -1,
       });
+
+      /** NPC / Player collision  */
+      this.playerCollider = scene.physics.add.collider((scene as any).player, this, () => {
+        this.moveTo.pause();
+        this.scene.time.delayedCall(2000, () => {
+          this.moveTo.resume();
+        }, [], this);
+      });
+
+      /** Set NPC patrol boundary */
+      this.body.setBoundsRectangle(new Phaser.Geom.Rectangle(this.x - 50, this.y - 50, 100, 100));
+      this.body.setCollideWorldBounds();
+      const boundTest = scene.add.graphics();
+      boundTest.lineStyle(2, 0xff0000, 1);
+      boundTest.strokeRect(this.x - 50, this.y - 50, 100, 100);
+
+      /** Start NPC patrol loop */
+      if (this.patrol) {
+        this.startPatrol();
+      }
     }
 
     /** Movement */
-
     oppositeDirection(): string {
       let opposite: string;
       switch (this.direction) {
@@ -117,20 +146,64 @@ export default class NPC extends Phaser.Physics.Arcade.Sprite {
     }
 
     /** Switch direction */
-
     directionSwitch(): void {
+      if (this.moveTo.isRunning) {
+        switch (this.direction) {
+          case 'up':
+            this.anims.play(`${this.texture.key}_walkUp`, true);
+            break;
+          case 'down':
+            this.anims.play(`${this.texture.key}_walkDown`, true);
+            break;
+          case 'left':
+            this.anims.play(`${this.texture.key}_walkLeft`, true);
+            break;
+          case 'right':
+            this.anims.play(`${this.texture.key}_walkRight`, true);
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (this.direction) {
+          case 'up':
+            this.anims.play(`${this.texture.key}_idleUp`, true);
+            break;
+          case 'down':
+            this.anims.play(`${this.texture.key}_idleDown`, true);
+            break;
+          case 'left':
+            this.anims.play(`${this.texture.key}_idleLeft`, true);
+            break;
+          case 'right':
+            this.anims.play(`${this.texture.key}_idleRight`, true);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
+    /** Stop Patrol */
+    stopPatrol(): void {
+      this.moveTo.stop();
+    }
+    /** Start Patrol */
+    startPatrol(): void {
+      /** Random direction loop */
+      this.direction = this.randomDirection();
       switch (this.direction) {
         case 'up':
-          this.anims.play(`${this.texture.key}_idleUp`, true);
+          this.moveTo.moveTo(this.x, this.y - 60);
           break;
         case 'down':
-          this.anims.play(`${this.texture.key}_idleDown`, true);
+          this.moveTo.moveTo(this.x, this.y + 60);
           break;
         case 'left':
-          this.anims.play(`${this.texture.key}_idleLeft`, true);
+          this.moveTo.moveTo(this.x - 60, this.y);
           break;
         case 'right':
-          this.anims.play(`${this.texture.key}_idleRight`, true);
+          this.moveTo.moveTo(this.x + 60, this.y);
           break;
         default:
           break;
@@ -138,16 +211,17 @@ export default class NPC extends Phaser.Physics.Arcade.Sprite {
     }
 
     /** Random direction */
-
     randomDirection(): string {
       const directions = ['up', 'down', 'left', 'right'];
       return directions[Math.floor(Math.random() * directions.length)];
     }
 
     /** Update */
-
     preUpdate(time: any, delta: any): void {
       super.preUpdate(time, delta);
       this.directionSwitch();
+      if (!this.body.blocked.none) {
+        this.startPatrol();
+      }
     }
 }

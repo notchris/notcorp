@@ -94,7 +94,7 @@ export default class StartScene extends Phaser.Scene {
   }
 
   dev(): void {
-    this.scene.start('IntroScene');
+    this.scene.start('TestListScene');
   }
   update(): void {
     if (this.loggedIn) {

@@ -75,7 +75,7 @@ export default class Choice extends Phaser.Scene {
     this.choiceBoxBorder.setTileScale(3, 3);
     this.choiceBoxBorder.alpha = 0.5;
 
-    this.choiceIndicator = this.add.text(228, 0, '⇨', { fontFamily: 'Varela Round', fontSize: 15, color: '#73c08c' });
+    this.choiceIndicator = this.add.text(228, 0, '⇨', { fontFamily: 'Bree Serif', fontSize: 15, color: '#73c08c' });
 
     this.choiceBox.setVisible(false);
     this.choiceBoxBorder.setVisible(false);
@@ -83,7 +83,7 @@ export default class Choice extends Phaser.Scene {
 
     /** Choice Prompt text */
     this.promptText = (this.add as any).rexBBCodeText(20, 340, '', {
-      fontFamily: 'Varela Round',
+      fontFamily: 'Bree Serif',
       fontSize: 16,
       color: '#ffffff',
     });
@@ -93,7 +93,7 @@ export default class Choice extends Phaser.Scene {
         if (isLastChar) {
           /** Choices Text */
           this.choices.forEach((choice, index) => {
-            this.choiceObjects.push(this.add.text(260, 200 + (index * 20), choice.text, { fontFamily: 'Varela Round', fontSize: 15, color: '#ffffff' }));
+            this.choiceObjects.push(this.add.text(260, 200 + (index * 20), choice.text, { fontFamily: 'Bree Serif', fontSize: 15, color: '#ffffff' }));
           });
           this.waiting = true;
         }

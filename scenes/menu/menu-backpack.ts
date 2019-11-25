@@ -61,7 +61,7 @@ export default class MenuBackpack extends Phaser.Scene {
     imageTitleStroke.fillRect(16, 86, 218, 2);
 
     /** Menu title text */
-    this.add.text(22, 67, 'Backpack', { fontFamily: 'Visitor TT1 BRK', fontSize: 20, color: '#333333' });
+    this.add.text(22, 67, 'Backpack', { fontFamily: 'Bree Serif', fontSize: 20, color: '#333333' });
 
     const itemPanelTopStroke = this.add.graphics();
     itemPanelTopStroke.fillStyle(0xCCCCCC, 1);

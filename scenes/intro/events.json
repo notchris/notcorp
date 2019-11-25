@@ -5,9 +5,6 @@
         "data": [
             [
                 "Hello there."
-            ],
-            [
-                "Thank you for joining us."
             ]
         ],
         "callback": 3
@@ -39,7 +36,7 @@
                 "That's good to hear! =)"
             ]
         ],
-        "callback": 7
+        "callback": 10
     },
     {
         "id": 5,
@@ -49,7 +46,7 @@
                 "Just average?"
             ]
         ],
-        "callback": 7
+        "callback": 10
     },
     {
         "id": 6,
@@ -57,99 +54,6 @@
         "data": [
             [
                 "In time...things will improve."
-            ]
-        ],
-        "callback": 7
-    },
-    {
-        "id": 7,
-        "type": "dialog",
-        "data": [
-            [
-                "Anyway..."
-            ],
-            [
-                "You're probably wondering, 'What is NOTCORP?'"
-            ],
-            [
-                "'Who is NOTCORP?..'"
-            ],
-            [
-                "'Why is NOTCORP?....'"
-            ],
-            [
-                "But we can only answer so many questions."
-            ],
-            [
-                "Like really, I'm not so much a peoples' person."
-            ],
-            [
-                "Or is it [i]peoples'[/i]?"
-            ],
-            [
-                "Also not really a grammar person so sorry..."
-            ],
-            [
-                "If I mess up in a few places."
-            ],
-            [
-                "But yeah, NOTCORP is the best."
-            ],
-            [
-                "Really fun, creative introductions..."
-            ],
-            [
-                "Really just AAA quality shit we're dishing out."
-            ],
-            [
-                "And it's all because of you."
-            ],
-            [
-                "What was your name again........?"
-            ],
-            [
-                "[color=#73c08c]notchris[/color] huh? Weird name."
-            ],
-            [
-                "OK, and what do you look like [color=#73c08c]notchris[/color]?"
-            ]
-        ],
-        "callback": 8
-    },
-    {
-        "id": 8,
-        "type": "editcharacter"
-    },
-    {
-        "id": 9,
-        "type": "dialog",
-        "data": [
-            [
-                "Hmm..."
-            ],
-            [
-                "Have you lost weight?"
-            ],
-            [
-                "Just kidding..."
-            ],
-            [
-                "You're in space by the way."
-            ],
-            [
-                "Did you think it was snowing?"
-            ],
-            [
-                "I can see that."
-            ],
-            [
-                "..."
-            ],
-            [
-                "OK! For real now. NOTCORP."
-            ],
-            [
-                "And........"
             ]
         ],
         "callback": 10

@@ -38,7 +38,7 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
 
-    const testNpc = new NPC(this, 120, 100, 'pink', 0);
+    // const testNpc = new NPC(this, 120, 100, 'pink', 0, false);
 
     const graphics = this.add.graphics();
     graphics.fillStyle(0x00ff00, 1);

@@ -60,7 +60,7 @@ export default class MenuNotebook extends Phaser.Scene {
     imageTitleStroke.fillRect(16, 86, 218, 2);
 
     /** Menu title text */
-    this.add.text(22, 67, 'Notebook', { fontFamily: 'Visitor TT1 BRK', fontSize: 20, color: '#333333' });
+    this.add.text(22, 67, 'Notebook', { fontFamily: 'Bree Serif', fontSize: 20, color: '#333333' });
   }
 
   update(): void {

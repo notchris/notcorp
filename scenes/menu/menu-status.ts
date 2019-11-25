@@ -60,7 +60,7 @@ export default class MenuStatus extends Phaser.Scene {
     imageTitleStroke.fillRect(16, 86, 218, 2);
 
     /** Menu title text */
-    this.add.text(22, 67, 'Status', { fontFamily: 'Visitor TT1 BRK', fontSize: 20, color: '#333333' });
+    this.add.text(22, 67, 'Status', { fontFamily: 'Bree Serif', fontSize: 20, color: '#333333' });
 
     /** Player image */
     const imagePlayer = this.add.tileSprite(22, 76, 50, 90, 'player', 0);
@@ -77,13 +77,13 @@ export default class MenuStatus extends Phaser.Scene {
     const year = dateObj.getUTCFullYear();
     const newdate = `${month}/${day}/${year}`;
 
-    (this.add as any).rexBBCodeText(80, 100, 'Name: [color=#015296]notchris[/color]', { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
-    (this.add as any).rexBBCodeText(80, 120, `Start: [color=#015296]${newdate}[/color]`, { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
-    (this.add as any).rexBBCodeText(80, 140, 'ID#: [color=#015296]1[/color]', { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
-    (this.add as any).rexBBCodeText(80, 160, 'Level: [color=#015296]1[/color]', { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
+    (this.add as any).rexBBCodeText(80, 100, 'Name: [color=#015296]notchris[/color]', { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
+    (this.add as any).rexBBCodeText(80, 120, `Start: [color=#015296]${newdate}[/color]`, { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
+    (this.add as any).rexBBCodeText(80, 140, 'ID#: [color=#015296]1[/color]', { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
+    (this.add as any).rexBBCodeText(80, 160, 'Level: [color=#015296]1[/color]', { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
 
     /** EXP Container */
-    this.add.text(26, 189, 'EXP', { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
+    this.add.text(26, 189, 'EXP', { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
     const expBarBg = this.add.graphics();
     expBarBg.fillStyle(0x333333, 1);
     expBarBg.fillRoundedRect(60, 190, 165, 12, 2);
@@ -99,7 +99,7 @@ export default class MenuStatus extends Phaser.Scene {
     expBarStroke.strokeRoundedRect(60, 190, 165, 12, 2);
 
     /** HP Container */
-    this.add.text(26, 209, 'HP', { fontFamily: 'Visitor TT1 BRK', fontSize: 14, color: '#333333' });
+    this.add.text(26, 209, 'HP', { fontFamily: 'Bree Serif', fontSize: 14, color: '#333333' });
     const hpBarBg = this.add.graphics();
     hpBarBg.fillStyle(0x333333, 1);
     hpBarBg.fillRoundedRect(60, 210, 165, 12, 2);

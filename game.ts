@@ -3,10 +3,16 @@ import 'phaser';
 import './assets/style.css';
 import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
+import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import LoginScene from './scenes/login-scene';
 import RegisterScene from './scenes/register-scene';
 import StartScene from './scenes/start-scene';
 import MainScene from './scenes/main-scene';
+import TestListScene from './scenes/test-scene';
+
+// Tests
+import TestDefault from './scenes/test/test_default';
+import TestNPC from './scenes/test/test_npc';
 
 import IntroScene from './scenes/intro/intro';
 
@@ -49,9 +55,15 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
         plugin: BBCodeTextPlugin,
         start: true,
       },
+      {
+        key: 'rexMoveTo',
+        plugin: MoveToPlugin,
+        start: true,
+      },
     ],
   },
-  scene: [StartScene, LoginScene, RegisterScene, IntroScene, MainScene],
+  scene: [StartScene, LoginScene, RegisterScene, TestListScene, IntroScene, MainScene,
+    TestDefault, TestNPC],
 };
 
 export class Game extends Phaser.Game {
@@ -64,7 +76,7 @@ export class Game extends Phaser.Game {
 window.addEventListener('load', () => {
   WebFont.load({
     google: {
-      families: ['Varela Round'],
+      families: ['Bree Serif'],
     },
     fontactive: (): void => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
