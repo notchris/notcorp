@@ -12,8 +12,9 @@ export default class Dialog extends Phaser.Scene {
   public waiting: boolean;
   public index: number;
   public callback: number;
+  public parentKey: string;
   keyE: Phaser.Input.Keyboard.Key;
-  constructor(dialog: string[][], callback?: number) {
+  constructor(dialog: string[][], callback?: number, parentKey?: string) {
     super({
       key: 'Dialog',
     });
@@ -28,6 +29,7 @@ export default class Dialog extends Phaser.Scene {
     this.keyE = null;
     this.index = 0;
     this.callback = callback || null;
+    this.parentKey = parentKey || null;
   }
 
   preload(): void {
@@ -107,8 +109,13 @@ export default class Dialog extends Phaser.Scene {
       } else {
         this.index = 0;
         this.waiting = false;
-        const parent: any = this.scene.get('IntroScene');
-        parent.endDialog(this.callback);
+        let parentScene: Phaser.Scene;
+        if (this.parentKey) {
+          parentScene = this.scene.get(this.parentKey);
+        } else {
+          parentScene = this.scene.get('IntroScene');
+        }
+        (parentScene as any).endDialog(this.callback);
       }
     }
   }

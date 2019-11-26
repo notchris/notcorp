@@ -13,6 +13,8 @@ import TestListScene from './scenes/test-scene';
 // Tests
 import TestDefault from './scenes/test/test_default';
 import TestNPC from './scenes/test/test_npc';
+import TestItem from './scenes/test/test_item';
+import TestToggle from './scenes/test/test_toggle';
 
 import IntroScene from './scenes/intro/intro';
 
@@ -63,7 +65,7 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     ],
   },
   scene: [StartScene, LoginScene, RegisterScene, TestListScene, IntroScene, MainScene,
-    TestDefault, TestNPC],
+    TestDefault, TestNPC, TestItem, TestToggle],
 };
 
 export class Game extends Phaser.Game {

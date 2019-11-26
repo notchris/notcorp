@@ -64,6 +64,7 @@ export default class Controls {
       /** Freeze controls & set player to idle */
       if (this.player.frozen) {
         this.player.anims.play(`idle${this.player.direction.charAt(0).toUpperCase()}${this.player.direction.slice(1)}`, true);
+        this.player.use = false;
         return;
       }
 
