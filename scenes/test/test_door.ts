@@ -1,9 +1,10 @@
 import TestUI from './ui';
 import Player from '../../classes/Player';
 import Controls from '../../util/Controls';
-import Item from '../../classes/Item';
+import Toggle from '../../classes/Toggle';
+import Door from '../../classes/Door';
 
-export default class TestItem extends Phaser.Scene {
+export default class TestDoor extends Phaser.Scene {
   public player: Player;
   public cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   public controls: Controls;
@@ -11,7 +12,7 @@ export default class TestItem extends Phaser.Scene {
 
   constructor() {
     super({
-      key: 'TestItem',
+      key: 'TestDoor',
     });
   }
 
@@ -34,7 +35,6 @@ export default class TestItem extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 14 * 16, 14 * 16);
     this.physics.world.setBounds(0, 0, 14 * 16, 14 * 16);
 
-    /** Sandbox logic */
     const testBounds = this.add.graphics();
     testBounds.lineStyle(4, 0x000000, 1);
     testBounds.strokeRect(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height);
@@ -43,33 +43,40 @@ export default class TestItem extends Phaser.Scene {
     testPattern.setTileScale(8, 8);
     testPattern.alpha = 0.1;
 
-    /** Player & controls */
     this.player = new Player(this, 100, 100, 'player', 0);
     this.controls = new Controls(this, this.input.keyboard, this.player);
-    /** Camera */
+
+    const testWallA = this.physics.add.sprite(40, 40, null, 0);
+    testWallA.body.height = 10;
+    testWallA.body.width = 80;
+    testWallA.displayHeight = 10;
+    testWallA.displayWidth = 80;
+    testWallA.setImmovable(true);
+
+    const testWallB = this.physics.add.sprite(160, 40, null, 0);
+    testWallB.body.height = 10;
+    testWallB.body.width = 120;
+    testWallB.displayHeight = 10;
+    testWallB.displayWidth = 120;
+    testWallB.setImmovable(true);
+
+    this.physics.add.collider(this.player, [testWallA, testWallB]);
+
     this.cameras.main.setBackgroundColor('#dddddd');
     this.cameras.main.fadeIn(1000);
     this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
 
-    /** Item Test */
-    const testItem = new Item(this, 50, 50, null, 0, 2);
+    const testToggle = new Toggle(this, 40, 100, null, 0);
+    const testDoor = new Door(this, 90, 40, null, 0, true, testToggle);
 
-    /** Sandbox logic */
     this.scene.add('TestUI', new TestUI(this, this.player, this.title, this.scene.key), true, {});
+
+    // End Test
     this.events.on('back', () => {
       this.scene.start('TestListScene', {});
       this.scene.stop(this.scene.key);
     }, this);
-  }
-
-  endDialog(callback: Function): void {
-    this.scene.remove('Dialog');
-    if (callback) {
-      callback();
-    } else {
-      this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
-    }
   }
 
   update(): void {

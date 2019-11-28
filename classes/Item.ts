@@ -1,22 +1,26 @@
 import Dialog from '../scenes/event/dialog';
 
+import ItemList = require('../data/items.json');
+
 export default class Item extends Phaser.Physics.Arcade.Sprite {
     public body: Phaser.Physics.Arcade.Body;
     public itemId: number;
     public itemTitle: string;
+    public itemDescription: string;
     constructor(
       scene: Phaser.Scene,
       x: number, y: number,
       texture: string,
       frame: number,
       itemId: number,
-      itemTitle: string,
     ) {
       super(scene, x, y, texture, frame);
       this.scene = scene;
       /** Item properties */
       this.itemId = itemId;
-      this.itemTitle = itemTitle;
+      const itemDetails = ItemList.filter((item: any) => item.id === this.itemId)[0];
+      this.itemTitle = itemDetails.title;
+      this.itemDescription = itemDetails.description;
 
       /** Sprite properties */
       if (texture) {
@@ -54,7 +58,7 @@ export default class Item extends Phaser.Physics.Arcade.Sprite {
       (this.scene as any).player.frozen = true;
       const didAddItem = (this.scene as any).player.backpack.addItem(this);
       if (!didAddItem) {
-        console.log('backpack is full bro');
+        // Backpack is full
         this.scene.scene.add(
           'DialogA',
           new Dialog([['Your backpack if full!']], null, this.scene.scene.key),
@@ -62,10 +66,10 @@ export default class Item extends Phaser.Physics.Arcade.Sprite {
           {},
         );
       } else {
-        console.log('put item in backpack dawg');
+        // Added item to backpack
         this.scene.scene.add(
           'DialogA',
-          new Dialog([[`You found: [color=#73c08c]${this.itemTitle}[/color].`], [`You put the [color=#73c08c]${this.itemTitle}[/color] in your backpack.`]], null, this.scene.scene.key),
+          new Dialog([[`You found: [color=#73c08c]${this.itemTitle}[/color].`], [this.itemDescription], [`You put the [color=#73c08c]${this.itemTitle}[/color] in your backpack.`]], null, this.scene.scene.key),
           true,
           {},
         );

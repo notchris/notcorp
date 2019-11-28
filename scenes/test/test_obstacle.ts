@@ -1,9 +1,9 @@
 import TestUI from './ui';
 import Player from '../../classes/Player';
 import Controls from '../../util/Controls';
-import Item from '../../classes/Item';
+import Obstacle from '../../classes/Obstacle';
 
-export default class TestItem extends Phaser.Scene {
+export default class TestObstacle extends Phaser.Scene {
   public player: Player;
   public cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   public controls: Controls;
@@ -11,7 +11,7 @@ export default class TestItem extends Phaser.Scene {
 
   constructor() {
     super({
-      key: 'TestItem',
+      key: 'TestObstacle',
     });
   }
 
@@ -52,8 +52,8 @@ export default class TestItem extends Phaser.Scene {
     this.cameras.main.zoom = 2;
     this.cameras.main.startFollow(this.player);
 
-    /** Item Test */
-    const testItem = new Item(this, 50, 50, null, 0, 2);
+    const testObstacle = new Obstacle(this, 100, 200, null, 0);
+
 
     /** Sandbox logic */
     this.scene.add('TestUI', new TestUI(this, this.player, this.title, this.scene.key), true, {});
@@ -61,15 +61,6 @@ export default class TestItem extends Phaser.Scene {
       this.scene.start('TestListScene', {});
       this.scene.stop(this.scene.key);
     }, this);
-  }
-
-  endDialog(callback: Function): void {
-    this.scene.remove('Dialog');
-    if (callback) {
-      callback();
-    } else {
-      this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
-    }
   }
 
   update(): void {

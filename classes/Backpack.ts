@@ -16,4 +16,22 @@ export default class Backpack extends Phaser.GameObjects.GameObject {
       }
       return false;
     }
+
+    checkItem(id: number): boolean {
+      const filterItem = this.items.filter((item) => item.itemId === id);
+      if (!filterItem.length) {
+        return false;
+      }
+      return true;
+    }
+
+    removeItem(id: number): boolean {
+      const filterItem = this.items.filter((item) => item.itemId === id);
+      if (filterItem.length) {
+        const index = this.items.indexOf(filterItem[0]);
+        this.items.splice(index, 1);
+        return true;
+      }
+      return false;
+    }
 }

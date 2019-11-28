@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "title": "Small Key",
+        "description": "It probably opens a door somewhere."
+    },
+    {
+        "id": 2,
+        "title": "Iced Latte",
+        "description": "A wonderful concoction of espresso and milk."
+    }
+]
