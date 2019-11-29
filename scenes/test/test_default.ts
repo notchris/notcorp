@@ -1,12 +1,14 @@
 import TestUI from './ui';
 import Player from '../../classes/Player';
 import Controls from '../../util/Controls';
+import Menu from '../menu/menu';
 
 export default class TestDefault extends Phaser.Scene {
   public player: Player;
   public cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   public controls: Controls;
   public title: string;
+  public menu: Phaser.Scene;
 
   constructor() {
     super({
@@ -42,7 +44,7 @@ export default class TestDefault extends Phaser.Scene {
     testPattern.alpha = 0.1;
 
     this.player = new Player(this, 100, 100, 'player', 0);
-    this.controls = new Controls(this, this.input.keyboard, this.player);
+    this.controls = new Controls(this, 'controls', this.input.keyboard, this.player);
 
     this.cameras.main.setBackgroundColor('#dddddd');
     this.cameras.main.fadeIn(1000);
@@ -56,6 +58,9 @@ export default class TestDefault extends Phaser.Scene {
       this.scene.start('TestListScene', {});
       this.scene.stop(this.scene.key);
     }, this);
+
+    /** Add Menu */
+    this.menu = this.scene.add('Menu', new Menu(this), true, {});
   }
 
   update(): void {

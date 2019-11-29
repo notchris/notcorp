@@ -24,7 +24,7 @@ export default class Dialog extends Phaser.Scene {
     };
     this.indicatorText = null;
     this.indicatorTextTween = null;
-    this.speed = 80;
+    this.speed = 45;
     this.waiting = false;
     this.keyE = null;
     this.index = 0;

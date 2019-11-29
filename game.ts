@@ -5,6 +5,7 @@ import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin';
 import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin';
 import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin';
 import FlashPlugin from 'phaser3-rex-plugins/plugins/flash-plugin';
+import UIPlugin from 'phaser3-rex-plugins/plugins/dist/rexuiplugin.min';
 
 
 import LoginScene from './scenes/login-scene';
@@ -72,6 +73,11 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
         key: 'rexFlash',
         plugin: FlashPlugin,
         start: true,
+      },
+      {
+        key: 'rexUI',
+        plugin: UIPlugin,
+        mapping: 'rexUI',
       },
     ],
   },

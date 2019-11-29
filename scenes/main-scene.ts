@@ -31,7 +31,7 @@ export default class MainScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 20 * 16, 20 * 16);
     this.physics.world.setBounds(0, 0, 20 * 16, 20 * 16);
     this.player = new Player(this, 100, 100, 'player', 0);
-    this.controls = new Controls(this, this.input.keyboard, this.player);
+    this.controls = new Controls(this, 'controls', this.input.keyboard, this.player);
 
     this.cameras.main.setBackgroundColor('#9bfbf0');
     this.cameras.main.fadeIn(1000);
@@ -62,15 +62,6 @@ export default class MainScene extends Phaser.Scene {
     } else {
       this.time.delayedCall(200, () => { this.player.frozen = false; }, [], this);
     }
-  }
-
-  startMenu(): void {
-    this.scene.add(
-      'Menu',
-      new Menu(),
-      true,
-      {},
-    );
   }
 
   endMenu(): void {

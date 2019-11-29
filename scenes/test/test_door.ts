@@ -44,7 +44,7 @@ export default class TestDoor extends Phaser.Scene {
     testPattern.alpha = 0.1;
 
     this.player = new Player(this, 100, 100, 'player', 0);
-    this.controls = new Controls(this, this.input.keyboard, this.player);
+    this.controls = new Controls(this, 'controls', this.input.keyboard, this.player);
 
     const testWallA = this.physics.add.sprite(40, 40, null, 0);
     testWallA.body.height = 10;

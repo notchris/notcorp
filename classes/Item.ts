@@ -5,8 +5,9 @@ import ItemList = require('../data/items.json');
 export default class Item extends Phaser.Physics.Arcade.Sprite {
     public body: Phaser.Physics.Arcade.Body;
     public itemId: number;
-    public itemTitle: string;
-    public itemDescription: string;
+    public title: string;
+    public description: string;
+    public droppable: boolean;
     constructor(
       scene: Phaser.Scene,
       x: number, y: number,
@@ -16,11 +17,13 @@ export default class Item extends Phaser.Physics.Arcade.Sprite {
     ) {
       super(scene, x, y, texture, frame);
       this.scene = scene;
+
       /** Item properties */
       this.itemId = itemId;
       const itemDetails = ItemList.filter((item: any) => item.id === this.itemId)[0];
-      this.itemTitle = itemDetails.title;
-      this.itemDescription = itemDetails.description;
+      this.title = itemDetails.title;
+      this.description = itemDetails.description;
+      this.droppable = itemDetails.droppable;
 
       /** Sprite properties */
       if (texture) {
@@ -69,7 +72,7 @@ export default class Item extends Phaser.Physics.Arcade.Sprite {
         // Added item to backpack
         this.scene.scene.add(
           'DialogA',
-          new Dialog([[`You found: [color=#73c08c]${this.itemTitle}[/color].`], [this.itemDescription], [`You put the [color=#73c08c]${this.itemTitle}[/color] in your backpack.`]], null, this.scene.scene.key),
+          new Dialog([[`You found: [color=#73c08c]${this.title}[/color].`], [this.description], [`You put the [color=#73c08c]${this.title}[/color] in your backpack.`]], null, this.scene.scene.key),
           true,
           {},
         );

@@ -5,17 +5,22 @@ import MenuNotebook from './menu-notebook';
 import MenuSettings from './menu-settings';
 
 export default class Menu extends Phaser.Scene {
-  keyEnter: Phaser.Input.Keyboard.Key;
-  keyUp: Phaser.Input.Keyboard.Key;
-  keyDown: Phaser.Input.Keyboard.Key;
-  menuIndex: number;
-  menuItems: Array<any>;
-  menuObjects: Array<any>;
-  timeText: Phaser.GameObjects.Text;
-  constructor() {
+  public isActive: boolean;
+  public parent: Phaser.Scene;
+  public keyEnter: Phaser.Input.Keyboard.Key;
+  public keyUp: Phaser.Input.Keyboard.Key;
+  public keyDown: Phaser.Input.Keyboard.Key;
+  public menuIndex: number;
+  public menuItems: Array<any>;
+  public menuObjects: Array<any>;
+  public timeText: Phaser.GameObjects.Text;
+  constructor(parent: Phaser.Scene) {
     super({
       key: 'Menu',
     });
+
+    this.parent = parent;
+    this.isActive = false;
 
     this.keyEnter = null;
     this.keyUp = null;
@@ -57,8 +62,6 @@ export default class Menu extends Phaser.Scene {
   }
 
   create(): void {
-    this.scene.pause('MainScene');
-    this.scene.pause('Dialog');
     this.keyEnter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -117,13 +120,24 @@ export default class Menu extends Phaser.Scene {
     });
 
     /** Sub Scenes */
-    this.scene.add('MenuStatus', MenuStatus, true, {});
-    this.scene.add('MenuBackpack', MenuBackpack, true, {});
-    this.scene.add('MenuNotebook', MenuNotebook, true, {});
-    this.scene.add('MenuSettings', MenuSettings, true, {});
+    this.scene.add('MenuStatus', new MenuStatus(this), true, {});
+    this.scene.add('MenuBackpack', new MenuBackpack(this), true, {});
+    this.scene.add('MenuNotebook', new MenuNotebook(this), true, {});
+    this.scene.add('MenuSettings', new MenuSettings(this), true, {});
   }
 
   update(): void {
+    if (!this.isActive) {
+      this.scene.resume(this.parent.scene.key);
+      this.scene.resume('Dialog');
+      this.scene.setVisible(false);
+      return;
+    }
+    this.scene.bringToTop(this.scene.key);
+    this.scene.pause(this.parent.scene.key);
+    this.scene.pause('Dialog');
+    this.scene.setVisible(true);
+
     const d = new Date();
     const s = d.getSeconds() < 10 ? (`0${d.getSeconds()}`) : d.getSeconds();
     const m = d.getMinutes() < 10 ? (`0${d.getMinutes()}`) : d.getMinutes();
@@ -136,6 +150,7 @@ export default class Menu extends Phaser.Scene {
         this.menuObjects[i].setColor('#005397');
         if (this.menuItems[i].scene) {
           this.scene.get(this.menuItems[i].scene).scene.setVisible(true);
+          this.scene.bringToTop(this.scene.get(this.menuItems[i].scene).scene.key);
         }
       } else {
         this.menuObjects[i].setColor('#000000');
@@ -145,12 +160,10 @@ export default class Menu extends Phaser.Scene {
       }
     }
 
-    if (Phaser.Input.Keyboard.JustDown(this.keyEnter)) {
+    if (Phaser.Input.Keyboard.JustDown(this.keyEnter) && this.isActive) {
       if (this.menuItems[this.menuIndex].id === 'close') {
-        this.scene.resume('MainScene');
-        this.scene.resume('Dialog');
-        const main: any = this.scene.get('MainScene');
-        main.endMenu();
+        this.menuIndex = 0;
+        this.isActive = false;
       }
     }
     if (Phaser.Input.Keyboard.JustDown(this.keyDown)) {

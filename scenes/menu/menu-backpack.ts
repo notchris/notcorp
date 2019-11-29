@@ -1,17 +1,17 @@
 
 export default class MenuBackpack extends Phaser.Scene {
+  parent: Phaser.Scene;
   keyEnter: Phaser.Input.Keyboard.Key;
   keyUp: Phaser.Input.Keyboard.Key;
   keyDown: Phaser.Input.Keyboard.Key;
   menuIndex: number;
   menuItems: Array<any>;
   menuObjects: Array<any>;
-  rexUI: any;
-  constructor() {
+  constructor(parent: Phaser.Scene) {
     super({
       key: 'MenuBackpack',
     });
-
+    this.parent = parent;
     this.keyEnter = null;
     this.keyUp = null;
     this.keyDown = null;
@@ -82,6 +82,8 @@ export default class MenuBackpack extends Phaser.Scene {
   }
 
   update(): void {
-    // Todo
+    if (!(this.parent as any).isActive) {
+      this.scene.setVisible(false);
+    }
   }
 }

@@ -47,7 +47,7 @@ export default class TestNPC extends Phaser.Scene {
     testPattern.alpha = 0.1;
 
     this.player = new Player(this, 100, 100, 'player', 0);
-    this.controls = new Controls(this, this.input.keyboard, this.player);
+    this.controls = new Controls(this, 'controls', this.input.keyboard, this.player);
 
     this.cameras.main.setBackgroundColor('#dddddd');
     this.cameras.main.fadeIn(1000);

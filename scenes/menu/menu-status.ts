@@ -1,16 +1,17 @@
 
 export default class MenuStatus extends Phaser.Scene {
+  public parent: Phaser.Scene;
   keyEnter: Phaser.Input.Keyboard.Key;
   keyUp: Phaser.Input.Keyboard.Key;
   keyDown: Phaser.Input.Keyboard.Key;
   menuIndex: number;
   menuItems: Array<any>;
   menuObjects: Array<any>;
-  constructor() {
+  constructor(parent: Phaser.Scene) {
     super({
       key: 'MenuStatus',
     });
-
+    this.parent = parent;
     this.keyEnter = null;
     this.keyUp = null;
     this.keyDown = null;
@@ -116,6 +117,8 @@ export default class MenuStatus extends Phaser.Scene {
   }
 
   update(): void {
-    // Todo
+    if (!(this.parent as any).isActive) {
+      this.scene.setVisible(false);
+    }
   }
 }

@@ -2,11 +2,13 @@
     {
         "id": 1,
         "title": "Small Key",
-        "description": "It probably opens a door somewhere."
+        "description": "It probably opens a door somewhere.",
+        "droppable": false
     },
     {
         "id": 2,
         "title": "Iced Latte",
-        "description": "A wonderful concoction of espresso and milk."
+        "description": "A wonderful concoction of espresso and milk.",
+        "droppable": true
     }
 ]

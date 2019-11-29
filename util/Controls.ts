@@ -1,6 +1,6 @@
 import Player from '../classes/Player';
 
-export default class Controls {
+export default class Controls extends Phaser.GameObjects.GameObject {
     scene: Phaser.Scene;
     cursors: Phaser.Input.Keyboard.KeyboardPlugin;
     keys: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -13,7 +13,10 @@ export default class Controls {
     keyEnter: Phaser.Input.Keyboard.Key;
 
     constructor(scene: Phaser.Scene,
+      type: string,
       cursors: Phaser.Input.Keyboard.KeyboardPlugin, player: Player) {
+      super(scene, type);
+
       this.scene = scene;
       this.player = player;
       this.cursors = cursors;
@@ -58,7 +61,10 @@ export default class Controls {
       }
 
       if (Phaser.Input.Keyboard.JustDown(this.keyEnter)) {
-        // this.scene.startMenu();
+        if (!(this.scene as any).menu) return;
+        if (!(this.scene as any).menu.isActive) {
+          (this.scene as any).menu.isActive = true;
+        }
       }
 
       /** Freeze controls & set player to idle */

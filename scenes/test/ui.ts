@@ -29,6 +29,11 @@ export default class TestUI extends Phaser.Scene {
     const backButton = this.add.text(340, 12, 'Back', { fontFamily: 'Arial', fontSize: 14, color: '#73c08c' });
     backButton.setInteractive({ useHandCursor: true });
     backButton.on('pointerdown', () => {
+      this.scene.remove('Menu');
+      this.scene.remove('MenuStatus');
+      this.scene.remove('MenuBackpack');
+      this.scene.remove('MenuNotebook');
+      this.scene.remove('MenuSettings');
       this.testScene.events.emit('back');
       this.scene.remove('TestUI');
     });
